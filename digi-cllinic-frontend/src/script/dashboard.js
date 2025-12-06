@@ -1,6 +1,14 @@
 let currentUser = null;
 
+        function hideAllDashboards() {
+            document.getElementById('mainDashboard').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('apotekerDashboard').classList.add('hidden');
+        }
+
         function showDashboard() {
+            hideAllDashboards();
             document.getElementById('mainDashboard').classList.remove('hidden');
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('registerForm').classList.add('hidden');
@@ -10,23 +18,21 @@ let currentUser = null;
         }
 
         function showLogin() {
-            document.getElementById('mainDashboard').classList.add('hidden');
+            hideAllDashboards();
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('registerForm').classList.add('hidden');
             document.getElementById('apotekerDashboard').classList.add('hidden');
         }
 
         function showRegister() {
-            document.getElementById('mainDashboard').classList.add('hidden');
-            document.getElementById('loginForm').classList.add('hidden');
+            hideAllDashboards();
             document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('apotekerDashboard').classList.add('hidden');
         }
 
         function showApotekerDashboard() {
-            document.getElementById('mainDashboard').classList.add('hidden');
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
+            hideAllDashboards();
             document.getElementById('apotekerDashboard').classList.remove('hidden');
             
             // Show notification for low stock
@@ -38,20 +44,24 @@ let currentUser = null;
         function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            // Simulasi login sebagai apoteker
-            currentUser = {
-                email: email,
-                role: 'apoteker'
-            };
-            
-            updateNavbar(true);
-            showApotekerDashboard();
+            // Simulated login - replace with actual authentication
+            console.log('Login attempt:', email, password);
+            alert('Login berhasil! (Fitur lengkap akan datang)');
+            showDashboard();
         }
 
         function handleRegister(event) {
             event.preventDefault();
-            alert('Registrasi berhasil! Silakan login.');
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const role = document.getElementById('registerRole').value;
+            
+            // Simulated registration - replace with actual backend
+            console.log('Register attempt:', name, email, role);
+            alert('Pendaftaran berhasil! Silahkan login.');
             showLogin();
         }
 
@@ -84,35 +94,3 @@ let currentUser = null;
         function closeNotification() {
             document.getElementById('notificationModal').style.display = 'none';
         }
-
-        function fetchDashboardData() {
-            fetch('http://localhost:3000/api/dashboard/dashboard')
-                .then(res => res.json())
-                .then(data => {
-                    document.querySelectorAll('.stat-value')[0].textContent = data.medicines.length;
-                    document.querySelectorAll('.stat-value')[1].textContent = data.medicines.filter(m => m.stock < 40).length;
-                    document.querySelectorAll('.stat-value')[2].textContent = '-';
-                });
-        }
-
-        function fetchNotifications() {
-            fetch('http://localhost:3000/api/notifications/notifications')
-                .then(res => res.json())
-                .then(notifications => {
-                    const notifList = document.querySelector('.notification-list');
-                    notifList.innerHTML = '';
-                    notifications.forEach(n => {
-                        notifList.innerHTML += `<li><strong>${n.message}</strong></li>`;
-                    });
-                    document.getElementById('notificationModal').style.display = 'block';
-                });
-        }
-
-        function closeNotification() {
-            document.getElementById('notificationModal').style.display = 'none';
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            fetchDashboardData();
-            fetchNotifications();
-        });
