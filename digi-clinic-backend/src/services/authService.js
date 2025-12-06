@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { JWT_SECRET } = process.env;
+const JWT_SECRET = process.env.JWT_SECRET || 'secretkey';
 
-// Dummy data for users
+// Dummy data untuk apoteker
 const users = [
     { id: 1, email: 'apoteker@digiclinic.com', password: bcrypt.hashSync('password123', 10), role: 'apoteker' }
 ];
@@ -17,7 +17,7 @@ const authService = {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = { id: users.length + 1, email, password: hashedPassword, role: 'apoteker' };
         users.push(newUser);
-        return newUser;
+        return { id: newUser.id, email: newUser.email, role: newUser.role };
     },
 
     login: async (email, password) => {
@@ -32,7 +32,7 @@ const authService = {
         }
 
         const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-        return { token, user };
+        return { token, user: { id: user.id, email: user.email, role: user.role } };
     },
 
     validateToken: (token) => {

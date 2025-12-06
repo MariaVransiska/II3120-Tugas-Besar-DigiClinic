@@ -4,11 +4,66 @@ const users = [
 
 // Dummy data untuk medicines
 const medicines = [
-    { id: 1, name: 'Paracetamol', stock: 99, price: 5000 },
-    { id: 2, name: 'Amoxicillin', stock: 125, price: 15000 },
-    { id: 3, name: 'Omeprazole', stock: 1000, price: 25000 },
-    { id: 4, name: 'Cetirizine', stock: 1000, price: 8000 },
-    { id: 5, name: 'Metformin', stock: 1000, price: 12000 }
+    {
+        id: 1,
+        name: 'Paracetamol',
+        disease: 'Demam, Nyeri',
+        productionDate: '15/01/2024',
+        expiryDate: '15/01/2026',
+        stock: 15,
+        stockLimit: 50,
+        price: 5000,
+        dose: '500mg',
+        description: '3x sehari'
+    },
+    {
+        id: 2,
+        name: 'Amoxicillin',
+        disease: 'Infeksi Bakteri',
+        productionDate: '20/02/2024',
+        expiryDate: '20/02/2026',
+        stock: 120,
+        stockLimit: 50,
+        price: 15000,
+        dose: '500mg',
+        description: '3x sehari setelah makan'
+    },
+    {
+        id: 3,
+        name: 'Omeprazole',
+        disease: 'Asam Lambung',
+        productionDate: '10/03/2024',
+        expiryDate: '10/03/2026',
+        stock: 30,
+        stockLimit: 40,
+        price: 25000,
+        dose: '20mg',
+        description: '1x sehari sebelum makan'
+    },
+    {
+        id: 4,
+        name: 'Cetirizine',
+        disease: 'Alergi',
+        productionDate: '05/04/2024',
+        expiryDate: '05/04/2026',
+        stock: 85,
+        stockLimit: 30,
+        price: 8000,
+        dose: '10mg',
+        description: '1x sehari'
+    },
+    {
+        id: 5,
+        name: 'Metformin',
+        disease: 'Diabetes',
+        productionDate: '12/05/2024',
+        expiryDate: '12/05/2026',
+        stock: 25,
+        stockLimit: 60,
+        price: 12000,
+        dose: '850mg',
+        description: '2x sehari dengan makan'
+    }
 ];
 
 exports.getDashboardData = (req, res) => {
@@ -62,4 +117,35 @@ exports.takeMedicine = (req, res) => {
         sisa: medicine.stock,
         alert
     });
+};
+
+exports.deleteMedicine = (req, res) => {
+    const { id } = req.params;
+    const idx = medicines.findIndex(m => m.id === parseInt(id));
+    if (idx === -1) {
+        return res.status(404).json({ message: 'Medicine not found' });
+    }
+    medicines.splice(idx, 1);
+    res.status(200).json({ message: 'Obat berhasil dihapus' });
+};
+
+exports.updateMedicine = (req, res) => {
+    const { id } = req.params;
+    const medicine = medicines.find(m => m.id === parseInt(id));
+    if (!medicine) {
+        return res.status(404).json({ message: 'Medicine not found' });
+    }
+    // Update field yang dikirim dari frontend
+    const { name, disease, productionDate, expiryDate, stock, stockLimit, price, dose, description } = req.body;
+    if (name !== undefined) medicine.name = name;
+    if (disease !== undefined) medicine.disease = disease;
+    if (productionDate !== undefined) medicine.productionDate = productionDate;
+    if (expiryDate !== undefined) medicine.expiryDate = expiryDate;
+    if (stock !== undefined) medicine.stock = stock;
+    if (stockLimit !== undefined) medicine.stockLimit = stockLimit;
+    if (price !== undefined) medicine.price = price;
+    if (dose !== undefined) medicine.dose = dose;
+    if (description !== undefined) medicine.description = description;
+
+    res.status(200).json({ message: 'Obat berhasil diupdate', medicine });
 };
