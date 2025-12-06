@@ -3,7 +3,7 @@ const router = express.Router();
 const dashboardController = require('../controllers/dashboardController');
 
 router.get('/dashboard', dashboardController.getDashboardData);
-
 router.get('/notifications', dashboardController.getLowStockMedicines);
+router.post('/take-medicine', dashboardController.takeMedicine);
 
 module.exports = router;
