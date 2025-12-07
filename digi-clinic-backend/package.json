@@ -1,5 +1,5 @@
 {
-  "name": "digi-clinic-backend",
+  "name": "digiclinic",
   "version": "1.0.0",
   "description": "Backend for DigiClinic application",
   "main": "src/app.js",
