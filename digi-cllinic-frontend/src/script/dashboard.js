@@ -117,34 +117,6 @@ let currentUser = null;
             }
         }
 
-        function handleLogoLoad(imgEl) {
-            // Logo berhasil dimuat
-            try {
-                imgEl.style.display = 'inline-block';
-                console.info('Logo loaded successfully:', imgEl.src);
-            } catch (e) {
-                console.warn('handleLogoLoad error', e);
-            }
-        }
-
-        function handleLogoError(imgEl) {
-            // Fallback: jika gambar gagal dimuat, gunakan SVG data-URL
-            try {
-                console.warn('Logo failed to load:', imgEl.src);
-                const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='80' viewBox='0 0 400 80'>
-                    <rect width='100%' height='100%' fill='transparent'/>
-                    <text x='0' y='58' font-family='Segoe UI, Tahoma, Geneva, Verdana, sans-serif' font-size='48' fill='#FEF1E6' font-weight='700'>DigiClinic</text>
-                </svg>`;
-                const dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-                imgEl.onerror = null;
-                imgEl.src = dataUrl;
-                imgEl.style.display = 'inline-block';
-                console.info('SVG fallback applied for logo');
-            } catch (e) {
-                console.warn('handleLogoError fallback error', e);
-            }
-        }
-
         // jalankan cek setelah DOM siap (tambahkan setAllLogos sebelum pengecekan)
         document.addEventListener('DOMContentLoaded', () => {
             try {
