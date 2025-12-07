@@ -57,7 +57,7 @@
                             <td>500mg</td>
                             <td>3x sehari</td>
                             <td>
-                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-edit" onclick="openEditModal('Paracetamol', 'Demam, Nyeri', '2024-01-15', '2026-01-15', '15', '50', '5000', '500mg', '3x sehari')">Edit</button>
                                 <button class="action-btn btn-delete">Hapus</button>
                             </td>
                         </tr>
@@ -72,7 +72,7 @@
                             <td>500mg</td>
                             <td>3x sehari setelah makan</td>
                             <td>
-                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-edit" onclick="openEditModal('Amoxicillin', 'Infeksi Bakteri', '2024-02-20', '2026-02-20', '120', '50', '15000', '500mg', '3x sehari setelah makan')">Edit</button>
                                 <button class="action-btn btn-delete">Hapus</button>
                             </td>
                         </tr>
@@ -87,7 +87,7 @@
                             <td>20mg</td>
                             <td>1x sehari sebelum makan</td>
                             <td>
-                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-edit" onclick="openEditModal('Omeprazole', 'Asam Lambung', '2024-03-10', '2026-03-10', '30', '40', '25000', '20mg', '1x sehari sebelum makan')">Edit</button>
                                 <button class="action-btn btn-delete">Hapus</button>
                             </td>
                         </tr>
@@ -102,7 +102,7 @@
                             <td>10mg</td>
                             <td>1x sehari</td>
                             <td>
-                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-edit" onclick="openEditModal('Cetirizine', 'Alergi', '2024-04-05', '2026-04-05', '85', '30', '8000', '10mg', '1x sehari')">Edit</button>
                                 <button class="action-btn btn-delete">Hapus</button>
                             </td>
                         </tr>
@@ -117,7 +117,7 @@
                             <td>850mg</td>
                             <td>2x sehari dengan makan</td>
                             <td>
-                                <button class="action-btn btn-edit">Edit</button>
+                                <button class="action-btn btn-edit" onclick="openEditModal('Metformin', 'Diabetes', '2024-05-12', '2026-05-12', '25', '60', '12000', '850mg', '2x sehari dengan makan')">Edit</button>
                                 <button class="action-btn btn-delete">Hapus</button>
                             </td>
                         </tr>
@@ -141,8 +141,71 @@
         </div>
     </div>
 
-    <script src="script/dashboard.js"></script>
-    <script>
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Data Obat</h2>
+            </div>
+
+            <form id="editObatForm" class="modal-body">
+                <div class="form-group">
+                    <label for="namaObat">Nama Obat</label>
+                    <input type="text" id="namaObat" name="namaObat" placeholder="Contoh: Paracetamol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="penyakit">Penyakit</label>
+                    <input type="text" id="penyakit" name="penyakit" placeholder="Contoh: Demam, Nyeri" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tglProduksi">Tanggal Produksi</label>
+                        <input type="date" id="tglProduksi" name="tglProduksi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tglKadaluarsa">Tanggal Kadaluarsa</label>
+                        <input type="date" id="tglKadaluarsa" name="tglKadaluarsa" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stok">Stok</label>
+                        <input type="number" id="stok" name="stok" min="0" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="batasStok">Batas Stok</label>
+                        <input type="number" id="batasStok" name="batasStok" min="0" placeholder="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="harga">Harga (Rp)</label>
+                        <input type="number" id="harga" name="harga" min="0" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosis">Dosis</label>
+                        <input type="text" id="dosis" name="dosis" placeholder="Contoh: 500mg" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                    <textarea id="keterangan" name="keterangan" placeholder="Contoh: 3x sehari setelah makan"></textarea>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="modal-btn btn-cancel" onclick="closeEditModal()">Cancel</button>
+                <button type="button" class="modal-btn btn-save" onclick="saveChanges()">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+     <script src="script/dashboard.js"></script>
+     <script>
         (function() {
             try {
                 const u = sessionStorage.getItem('currentUser');
@@ -156,6 +219,6 @@
                 window.location.href = 'index.html';
             }
         })();
-    </script>
+     </script>
 </body>
 </html>

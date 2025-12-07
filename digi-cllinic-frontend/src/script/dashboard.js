@@ -106,6 +106,41 @@ function setAllLogos() {
     }
 }
 
+function openEditModal(namaObat, penyakit, tglProduksi, tglKadaluarsa, stok, batasStok, harga, dosis, keterangan) {
+    document.getElementById('namaObat').value = namaObat;
+    document.getElementById('penyakit').value = penyakit;
+    document.getElementById('tglProduksi').value = tglProduksi;
+    document.getElementById('tglKadaluarsa').value = tglKadaluarsa;
+    document.getElementById('stok').value = stok;
+    document.getElementById('batasStok').value = batasStok;
+    document.getElementById('harga').value = harga;
+    document.getElementById('dosis').value = dosis;
+    document.getElementById('keterangan').value = keterangan;
+    
+    document.getElementById('editModal').classList.add('show');
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').classList.remove('show');
+}
+
+function saveChanges() {
+    const form = document.getElementById('editObatForm');
+    if (form.checkValidity()) {
+        alert('Perubahan berhasil disimpan!');
+        closeEditModal();
+    } else {
+        alert('Harap isi semua field yang diperlukan');
+    }
+}
+
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('editModal');
+    if (event.target === modal) {
+        closeEditModal();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     try {
         setAllLogos();
