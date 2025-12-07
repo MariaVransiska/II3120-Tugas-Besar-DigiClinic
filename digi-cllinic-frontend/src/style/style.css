@@ -489,6 +489,7 @@ tr:hover {
     align-items: flex-start;
     justify-content: flex-start;
     padding: 2rem;
+    padding-right: 10rem;
     color: #FEF1E6;
     border-radius: 30px;
     margin-top: 0.5rem;
