@@ -1,3 +1,4 @@
+alert('dashboard.js loaded');
 let currentUser = null;
 
 function hideAllDashboards() {
@@ -33,6 +34,7 @@ function showRegister() {
 function showApotekerDashboard() {
     hideAllDashboards();
     document.getElementById('apotekerDashboard').classList.remove('hidden');
+    fetchObatTable();
     setTimeout(() => {
         showNotification();
     }, 500);
@@ -125,9 +127,29 @@ function closeEditModal() {
 
 function saveChanges() {
     const form = document.getElementById('editObatForm');
+    const id = form.dataset.id;
     if (form.checkValidity()) {
-        alert('Perubahan berhasil disimpan!');
-        closeEditModal();
+        fetch(`http://localhost:3000/api/dashboard/medicine/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: document.getElementById('namaObat').value,
+                disease: document.getElementById('penyakit').value,
+                // productionDate: document.getElementById('tglProduksi').value,
+                // expiryDate: document.getElementById('tglKadaluarsa').value,
+                stock: parseInt(document.getElementById('stok').value),
+                stockLimit: parseInt(document.getElementById('batasStok').value),
+                price: parseInt(document.getElementById('harga').value),
+                dose: document.getElementById('dosis').value,
+                description: document.getElementById('keterangan').value
+            })
+        })
+        .then(res => res.json())
+        .then(result => {
+            alert(result.message);
+            closeEditModal();
+            fetchObatTable();
+        });
     } else {
         alert('Harap isi semua field yang diperlukan');
     }
@@ -164,39 +186,112 @@ function saveNewObat() {
     const dosis = document.getElementById('addDosis').value.trim();
     const keterangan = document.getElementById('addKeterangan').value.trim();
 
-    const tbody = document.getElementById('obatTableBody');
-    const tr = document.createElement('tr');
-
-    const prodDisplay = formatDateDisplay(prodIso);
-    const expDisplay = formatDateDisplay(expIso);
-
-    tr.innerHTML = `
-        <td>${nama}</td>
-        <td>${penyakit}</td>
-        <td>${prodDisplay}</td>
-        <td>${expDisplay}</td>
-        <td class="${Number(stok) <= Number(batas) ? 'stock-warning' : 'stock-ok'}">${stok}</td>
-        <td>${batas}</td>
-        <td>Rp ${Number(harga).toLocaleString('id-ID')}</td>
-        <td>${dosis}</td>
-        <td>${keterangan}</td>
-        <td>
-            <button class="action-btn btn-edit" onclick="openEditModal('${escapeQuotes(nama)}','${escapeQuotes(penyakit)}','${prodIso}','${expIso}','${stok}','${batas}','${harga}','${escapeQuotes(dosis)}','${escapeQuotes(keterangan)}')">Edit</button>
-            <button class="action-btn btn-delete" onclick="deleteRow(this)">Hapus</button>
-        </td>
-    `;
-    tbody.appendChild(tr);
-    closeAddModal();
-    alert('Obat baru berhasil ditambahkan');
+    fetch('http://localhost:3000/api/dashboard/medicine', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: nama,
+            disease: penyakit,
+            productionDate: prodIso,
+            expiryDate: expIso,
+            stock: parseInt(stok),
+            stockLimit: parseInt(batas),
+            price: parseInt(harga),
+            dose: dosis,
+            description: keterangan
+        })
+    })
+    .then(res => res.json())
+    .then(result => {
+        if (result.medicine && result.medicine.id) {
+            alert('Obat baru berhasil ditambahkan');
+            closeAddModal();
+            fetchObatTable(); 
+        } else {
+            alert('Gagal menambah obat');
+        }
+    });
 }
 
-function deleteRow(btn) {
-    const tr = btn.closest('tr');
-    if (confirm('Hapus obat ini?')) tr.remove();
+function deleteMedicine(id) {
+    if (!confirm('Hapus obat ini?')) return;
+    fetch(`http://localhost:3000/api/dashboard/medicine/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(result => {
+        alert(result.message);
+        fetchObatTable(); 
+    });
 }
 
 function escapeQuotes(str) {
     return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function fetchObatTable() {
+    fetch('http://localhost:3000/api/dashboard/dashboard')
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('obatTableBody');
+            tbody.innerHTML = '';
+            let lowStockList = [];
+            data.medicines.forEach(med => {
+                const stockClass = med.stock < 100 ? 'stock-warning' : 'stock-ok';
+                if (med.stock < 100) lowStockList.push(`${med.name} (Stok: ${med.stock})`);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${med.name}</td>
+                        <td>${med.disease}</td>
+                        <td>${med.productionDate}</td>
+                        <td>${med.expiryDate}</td>
+                        <td class="${stockClass}">${med.stock}</td>
+                        <td>${med.stockLimit}</td>
+                        <td>Rp ${med.price}</td>
+                        <td>${med.dose}</td>
+                        <td>${med.description}</td>
+                        <td>
+                            <button class="action-btn btn-edit" onclick="showEditForm(${med.id})">Edit</button>
+                            <button class="action-btn btn-delete" onclick="deleteMedicine(${med.id})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            if (lowStockList.length > 0) {
+                showLowStockNotification(lowStockList);
+            }
+        });
+}
+
+function showLowStockNotification(list) {
+    const notifModal = document.getElementById('notificationModal');
+    const notifList = notifModal.querySelector('.notification-list');
+    notifList.innerHTML = '';
+    list.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        notifList.appendChild(li);
+    });
+    notifModal.style.display = 'flex';
+}
+
+function showEditForm(id) {
+    fetch('http://localhost:3000/api/dashboard/medicine/' + id)
+        .then(res => res.json())
+        .then(med => {
+            document.getElementById('namaObat').value = med.name;
+            document.getElementById('penyakit').value = med.disease;
+            document.getElementById('tglProduksi').value = med.productionDate;
+            document.getElementById('tglKadaluarsa').value = med.expiryDate;
+            document.getElementById('stok').value = med.stock;
+            document.getElementById('batasStok').value = med.stockLimit;
+            document.getElementById('harga').value = med.price;
+            document.getElementById('dosis').value = med.dose;
+            document.getElementById('keterangan').value = med.description;
+            document.getElementById('editObatForm').dataset.id = id;
+            document.getElementById('editModal').classList.add('show');
+        });
 }
 
 window.addEventListener('click', (event) => {
@@ -207,9 +302,6 @@ window.addEventListener('click', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    try {
-        setAllLogos();
-    } catch (e) {
-        console.warn('error running setAllLogos', e);
-    }
+    setAllLogos();
+    showApotekerDashboard();
 });
