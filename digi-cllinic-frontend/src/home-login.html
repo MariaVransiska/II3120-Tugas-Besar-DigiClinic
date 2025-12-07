@@ -3,19 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>DigiClinic - Home (Logged In)</title>
-    <link rel="stylesheet" href="style/style.css" />
+    <title>DigiClinic</title>
+    <link rel="stylesheet" href="style/style-logged-in.css" />
 </head>
 <body>
-    <!-- Navbar (logged-in) -->
     <nav class="navbar" id="navbar">
         <div class="nav-logo">
         <a href="index.html" class="navbar-brand">
-            <img src="digi-cllinic-frontend/images/DIGICLINIC.png"
-                 alt="DigiClinic Logo"
-                 class="logo-img"
-                 onload="handleLogoLoad(this)"
-                 onerror="handleLogoError(this)">
+            <img src="../images/DIGICLINIC.png" alt="DigiClinic Logo" class="logo-img" onload="handleLogoLoad(this)" onerror="handleLogoError(this)">
             <span class="brand-text" aria-hidden="true">DigiClinic</span>
         </a>
         </div>
@@ -26,7 +21,6 @@
     </nav>
 
     <div class="container">
-        <!-- langsung tampilkan dashboard apoteker -->
         <div id="apotekerDashboard">
             <div class="dashboard-header">
                 <h1>Dashboard Apoteker</h1>
@@ -55,7 +49,6 @@
                         </tr>
                     </thead>
                     <tbody id="obatTableBody">
-                        <!-- ...existing rows copied from index.html... -->
                         <tr>
                             <td>Paracetamol</td>
                             <td>Demam, Nyeri</td>
@@ -153,7 +146,6 @@
 
     <script src="script/dashboard.js"></script>
     <script>
-        // pastikan user login, jika tidak redirect ke index
         (function() {
             try {
                 const u = sessionStorage.getItem('currentUser');
