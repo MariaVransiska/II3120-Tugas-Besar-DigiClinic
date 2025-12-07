@@ -35,7 +35,6 @@ let currentUser = null;
             hideAllDashboards();
             document.getElementById('apotekerDashboard').classList.remove('hidden');
             
-            // Show notification for low stock
             setTimeout(() => {
                 showNotification();
             }, 500);
@@ -46,10 +45,13 @@ let currentUser = null;
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Simulated login - replace with actual authentication
+            // Simulated login (ganti dengan autentikasi nyata nanti)
             console.log('Login attempt:', email, password);
-            alert('Login berhasil! (Fitur lengkap akan datang)');
-            showDashboard();
+
+            // Simpan status login di sessionStorage dan redirect ke halaman setelah login
+            const user = { email }; // tambahkan role jika ada
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            window.location.href = 'home-login.html';
         }
 
         function handleRegister(event) {
@@ -82,9 +84,12 @@ let currentUser = null;
         }
 
         function logout() {
-            currentUser = null;
-            showDashboard();
-            alert('Anda telah logout');
+            try {
+                sessionStorage.removeItem('currentUser');
+            } catch (e) {
+                console.warn('logout storage error', e);
+            }
+            window.location.href = 'index.html';
         }
 
         function showNotification() {
@@ -94,3 +99,61 @@ let currentUser = null;
         function closeNotification() {
             document.getElementById('notificationModal').style.display = 'none';
         }
+
+        // pastikan semua logo pakai file yang sama
+        function setAllLogos() {
+            try {
+                const logos = document.querySelectorAll('.logo-img');
+                logos.forEach(img => {
+                    const desired = 'images/DIGICLINIC.png';
+                    if (img.getAttribute('src') !== desired) {
+                        // jangan override jika already data URL fallback set earlier
+                        img.setAttribute('src', desired);
+                    }
+                });
+                console.info('All logos set to images/DIGICLINIC.png');
+            } catch (e) {
+                console.warn('setAllLogos error', e);
+            }
+        }
+
+        function handleLogoLoad(imgEl) {
+            // Logo berhasil dimuat
+            try {
+                imgEl.style.display = 'inline-block';
+                console.info('Logo loaded successfully:', imgEl.src);
+            } catch (e) {
+                console.warn('handleLogoLoad error', e);
+            }
+        }
+
+        function handleLogoError(imgEl) {
+            // Fallback: jika gambar gagal dimuat, gunakan SVG data-URL
+            try {
+                console.warn('Logo failed to load:', imgEl.src);
+                const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='80' viewBox='0 0 400 80'>
+                    <rect width='100%' height='100%' fill='transparent'/>
+                    <text x='0' y='58' font-family='Segoe UI, Tahoma, Geneva, Verdana, sans-serif' font-size='48' fill='#FEF1E6' font-weight='700'>DigiClinic</text>
+                </svg>`;
+                const dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+                imgEl.onerror = null;
+                imgEl.src = dataUrl;
+                imgEl.style.display = 'inline-block';
+                console.info('SVG fallback applied for logo');
+            } catch (e) {
+                console.warn('handleLogoError fallback error', e);
+            }
+        }
+
+        // jalankan cek setelah DOM siap (tambahkan setAllLogos sebelum pengecekan)
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // pastikan semua logo merujuk ke gambar yang disepakati
+                setAllLogos();
+            } catch (e) {
+                console.warn('error running setAllLogos', e);
+            }
+            
+            // ...if existing code had checkLogoAvailability or other init, keep it here...
+            // existing init (e.g., check logo availability) will still run
+        });

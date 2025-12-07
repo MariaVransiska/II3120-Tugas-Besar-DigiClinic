@@ -3,220 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiClinic - Manajemen Obat Rumah Sakit</title>
+    <title>DigiClinic</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="navbar-brand" onclick="showDashboard()">
-            <img src="images/DIGICLINIC.png" alt="DigiClinic Logo" class="logo-img">
-        </a>
-        <ul class="navbar-menu" id="navMenu">
-            <li><a href="#" onclick="showLogin()">Login</a></li>
-            <li><a href="#" onclick="showRegister()">Register</a></li>
-        </ul>
-    </nav>
+        <div class="nav-logo">
+         <a href="index.html" class="navbar-brand">
+            <img src="digi-cllinic-frontend/images/DIGICLINIC.png"
+                 alt="DigiClinic Logo"
+                 class="logo-img"
+                 onload="handleLogoLoad(this)"
+                 onerror="handleLogoError(this)">
+             <span class="brand-text" aria-hidden="true">DigiClinic</span>
+         </a>
+         </div>
+         <ul class="navbar-menu" id="navMenu">
+             <li><a href="login.html">Login</a></li>
+             <li><a href="register.html">Register</a></li>
+         </ul>
+     </nav>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Dashboard Utama -->
-        <div id="mainDashboard">
-            <div class="dashboard-header">
-                <h1>Selamat Datang di DigiClinic</h1>
-                <p>Sistem Manajemen Obat Rumah Sakit</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Obat Terdaftar</h3>
-                    <div class="stat-value">-</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Obat Stok Menipis</h3>
-                    <div class="stat-value">-</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Obat Kadaluarsa Bulan Ini</h3>
-                    <div class="stat-value">-</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login Form -->
-        <div id="loginForm" class="hidden">
-            <div class="auth-container">
-                <h2>Login</h2>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn">Login</button>
-                    <button type="button" class="btn btn-secondary" onclick="showRegister()">Belum punya akun? Daftar</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Register Form -->
-        <div id="registerForm" class="hidden">
-            <div class="auth-container">
-                <h2>Daftar</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="registerName">Nama Lengkap</label>
-                        <input type="text" id="registerName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerRole">Role</label>
-                        <select id="registerRole" required>
-                            <option value="">Pilih Role</option>
-                            <option value="apoteker">Apoteker</option>
-                            <option value="admin">Admin</option>
-                            <option value="dokter">Dokter</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn">Daftar</button>
-                    <button type="button" class="btn btn-secondary" onclick="showLogin()">Sudah punya akun? Login</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Dashboard Apoteker -->
-        <div id="apotekerDashboard" class="hidden">
-            <div class="dashboard-header">
-                <h1>Dashboard Apoteker</h1>
-                <p>Kelola data obat-obatan rumah sakit</p>
-            </div>
-            
-            <div class="table-container">
-                <div class="table-header">
-                    <h2>Daftar Obat</h2>
-                    <button class="btn-add" onclick="alert('Fitur tambah obat akan segera tersedia')">+ Tambah Obat</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nama Obat</th>
-                            <th>Penyakit</th>
-                            <th>Tanggal Produksi</th>
-                            <th>Tanggal Kadaluarsa</th>
-                            <th>Stok</th>
-                            <th>Batas Stok</th>
-                            <th>Harga</th>
-                            <th>Dosis</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="obatTableBody">
-                        <tr>
-                            <td>Paracetamol</td>
-                            <td>Demam, Nyeri</td>
-                            <td>15/01/2024</td>
-                            <td>15/01/2026</td>
-                            <td class="stock-warning">15</td>
-                            <td>50</td>
-                            <td>Rp 5.000</td>
-                            <td>500mg</td>
-                            <td>3x sehari</td>
-                            <td>
-                                <button class="action-btn btn-edit">Edit</button>
-                                <button class="action-btn btn-delete">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Amoxicillin</td>
-                            <td>Infeksi Bakteri</td>
-                            <td>20/02/2024</td>
-                            <td>20/02/2026</td>
-                            <td class="stock-ok">120</td>
-                            <td>50</td>
-                            <td>Rp 15.000</td>
-                            <td>500mg</td>
-                            <td>3x sehari setelah makan</td>
-                            <td>
-                                <button class="action-btn btn-edit">Edit</button>
-                                <button class="action-btn btn-delete">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Omeprazole</td>
-                            <td>Asam Lambung</td>
-                            <td>10/03/2024</td>
-                            <td>10/03/2026</td>
-                            <td class="stock-warning">30</td>
-                            <td>40</td>
-                            <td>Rp 25.000</td>
-                            <td>20mg</td>
-                            <td>1x sehari sebelum makan</td>
-                            <td>
-                                <button class="action-btn btn-edit">Edit</button>
-                                <button class="action-btn btn-delete">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cetirizine</td>
-                            <td>Alergi</td>
-                            <td>05/04/2024</td>
-                            <td>05/04/2026</td>
-                            <td class="stock-ok">85</td>
-                            <td>30</td>
-                            <td>Rp 8.000</td>
-                            <td>10mg</td>
-                            <td>1x sehari</td>
-                            <td>
-                                <button class="action-btn btn-edit">Edit</button>
-                                <button class="action-btn btn-delete">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Metformin</td>
-                            <td>Diabetes</td>
-                            <td>12/05/2024</td>
-                            <td>12/05/2026</td>
-                            <td class="stock-warning">25</td>
-                            <td>60</td>
-                            <td>Rp 12.000</td>
-                            <td>850mg</td>
-                            <td>2x sehari dengan makan</td>
-                            <td>
-                                <button class="action-btn btn-edit">Edit</button>
-                                <button class="action-btn btn-delete">Hapus</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Modal -->
-    <div id="notificationModal" class="notification-modal">
-        <div class="notification-content">
-            <h3>⚠️ Peringatan Stok Obat!</h3>
-            <p>Beberapa obat memiliki stok yang sudah mencapai atau di bawah batas minimum:</p>
-            <ul class="notification-list">
-                <li><strong>Paracetamol</strong> - Stok: 15 (Batas: 50)</li>
-                <li><strong>Omeprazole</strong> - Stok: 30 (Batas: 40)</li>
-                <li><strong>Metformin</strong> - Stok: 25 (Batas: 60)</li>
-            </ul>
-            <p>Harap segera lakukan pemesanan ulang!</p>
-            <button class="btn-close" onclick="closeNotification()">Tutup</button>
-        </div>
-    </div>
-
-    <script src="script/dashboard.js"></script>
+     <!-- Hero: halaman selamat datang -->
+     <main class="hero" role="main" aria-labelledby="welcome-heading">
+         <h1 id="welcome-heading">Selamat Datang di DigiClinic</h1>
+         <p>Sistem Manajemen Obat Rumah Sakit</p>
+         <a class="cta" href="login.html">Masuk / Login</a>
+     </main>
 </body>
 </html>

@@ -22,7 +22,7 @@
 
         .navbar-brand {
             color: #FEF1E6;
-            font-size: 1.8rem;
+            font-size: 1.2rem;
             font-weight: bold;
             text-decoration: none;
             display: inline-flex;
@@ -31,17 +31,22 @@
         }
 
         .logo-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
+            max-height: 56px; /* tinggi navbar-friendly */
+            width: auto;
+            height: auto;
+            border-radius: 6px;
             object-fit: contain;
             transition: transform 0.2s ease;
             display: inline-block;
+            background: transparent;
         }
 
+        /* sembunyikan teks brand saat logo berhasil dimuat; tampilkan hanya jika logo gagal */
         .brand-text {
             color: #FEF1E6;
             font-weight: 700;
+            display: none; /* fallback text ditampilkan oleh JS jika gambar gagal */
+            line-height: 1;
         }
 
         .navbar-menu {
@@ -177,6 +182,7 @@
 
         .btn-secondary {
             background-color: #FFB085;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin-top: 0.5rem;
         }
 
@@ -332,4 +338,39 @@
 
         .btn-delete:hover {
             background-color: #b71c1c;
+        }
+
+        /* Hero: halaman selamat datang */
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.5rem;
+            padding: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            color: #90AACB;
+            margin-bottom: 0.25rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #FFB085;
+            margin-bottom: 1rem;
+        }
+        .hero .cta {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            background: #90AACB;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .hero .cta:hover {
+            background: #FFB085;
+            color: #fff;
         }
