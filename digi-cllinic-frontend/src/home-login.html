@@ -27,7 +27,7 @@
             <div class="table-container">
                 <div class="table-header">
                     <h2>Daftar Obat</h2>
-                    <button class="btn-add" onclick="alert('Fitur tambah obat akan segera tersedia')">+ Tambah Obat</button>
+                    <button class="btn-add" onclick="openAddModal()">+ Tambah Obat</button>
                 </div>
 
                 <table>
@@ -200,6 +200,62 @@
             <div class="modal-footer">
                 <button type="button" class="modal-btn btn-cancel" onclick="closeEditModal()">Cancel</button>
                 <button type="button" class="modal-btn btn-save" onclick="saveChanges()">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tambah Data Obat</h2>
+            </div>
+            <form id="addObatForm" class="modal-body">
+                <div class="form-group">
+                    <label for="addNama">Nama Obat</label>
+                    <input type="text" id="addNama" name="addNama" placeholder="Contoh: Paracetamol" required>
+                </div>
+                <div class="form-group">
+                    <label for="addPenyakit">Penyakit</label>
+                    <input type="text" id="addPenyakit" name="addPenyakit" placeholder="Contoh: Demam, Nyeri" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addTglProduksi">Tanggal Produksi</label>
+                        <input type="date" id="addTglProduksi" name="addTglProduksi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addTglKadaluarsa">Tanggal Kadaluarsa</label>
+                        <input type="date" id="addTglKadaluarsa" name="addTglKadaluarsa" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addStok">Stok</label>
+                        <input type="number" id="addStok" name="addStok" min="0" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addBatasStok">Batas Stok</label>
+                        <input type="number" id="addBatasStok" name="addBatasStok" min="0" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addHarga">Harga (Rp)</label>
+                        <input type="number" id="addHarga" name="addHarga" min="0" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addDosis">Dosis</label>
+                        <input type="text" id="addDosis" name="addDosis" placeholder="Contoh: 500mg" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addKeterangan">Keterangan</label>
+                    <textarea id="addKeterangan" name="addKeterangan" placeholder="Contoh: 3x sehari setelah makan"></textarea>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn btn-cancel" onclick="closeAddModal()">Cancel</button>
+                <button type="button" class="modal-btn btn-save" onclick="saveNewObat()">Tambah Obat</button>
             </div>
         </div>
     </div>
