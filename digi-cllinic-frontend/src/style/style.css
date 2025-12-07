@@ -25,6 +25,23 @@
             font-size: 1.8rem;
             font-weight: bold;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .brand-text {
+            color: #FEF1E6;
+            font-weight: 700;
         }
 
         .navbar-menu {

@@ -9,7 +9,9 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="navbar-brand" onclick="showDashboard()">DigiClinic</a>
+        <a href="#" class="navbar-brand" onclick="showDashboard()">
+            <img src="images/DIGICLINIC.png" alt="DigiClinic Logo" class="logo-img">
+        </a>
         <ul class="navbar-menu" id="navMenu">
             <li><a href="#" onclick="showLogin()">Login</a></li>
             <li><a href="#" onclick="showRegister()">Register</a></li>
@@ -43,7 +45,7 @@
         <!-- Login Form -->
         <div id="loginForm" class="hidden">
             <div class="auth-container">
-                <h2>Login ke DigiClinic</h2>
+                <h2>Login</h2>
                 <form onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label for="loginEmail">Email</label>
@@ -62,7 +64,7 @@
         <!-- Register Form -->
         <div id="registerForm" class="hidden">
             <div class="auth-container">
-                <h2>Daftar DigiClinic</h2>
+                <h2>Daftar</h2>
                 <form onsubmit="handleRegister(event)">
                     <div class="form-group">
                         <label for="registerName">Nama Lengkap</label>
