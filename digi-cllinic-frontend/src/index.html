@@ -11,60 +11,63 @@
     <div class="login-container">
         <div class="login-hero">
             <div class="hero-content">
-                <img src="/digi-cllinic-frontend/images/DIGICLINIC.png" alt="DigiClinic Logo" class="hero-logo">
-                <h1>Selamat Datang di DigiClinic!</h1>
-                <p>Your one solution to a modern hospital!</p>
-            </div>
-        </div>
+                <img src="../images/DIGICLINIC.png"
+                     alt="DigiClinic Logo"
+                     class="hero-logo logo-img"
+                     onload="handleLogoLoad(this)"
+                     onerror="handleLogoError(this)">
+                 <h1>Selamat Datang di DigiClinic!</h1>
+                 <p>Your one solution to a modern hospital!</p>
+             </div>
+         </div>
 
-        <!-- Right: Form Section -->
-        <div class="login-form-section">
-            <div class="form-wrapper" id="loginWrapper">
-                <h2>Login</h2>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" placeholder="name@mail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" placeholder="••••••••••••••••" required>
-                    </div>
-                    <button type="submit" class="btn btn-login-1">Login</button>
-                    <button type="button" class="btn btn-signup-1" onclick="toggleForm()">Belum punya akun? Sign up!</button>
-                </form>
-            </div>
+         <div class="login-form-section">
+             <div class="form-wrapper" id="loginWrapper">
+                 <h2>Login</h2>
+                 <form onsubmit="handleLogin(event)">
+                     <div class="form-group">
+                         <label for="loginEmail">Email</label>
+                         <input type="email" id="loginEmail" placeholder="name@mail.com" required>
+                     </div>
+                     <div class="form-group">
+                         <label for="loginPassword">Password</label>
+                         <input type="password" id="loginPassword" placeholder="••••••••••••••••" required>
+                     </div>
+                     <button type="submit" class="btn btn-login-1">Login</button>
+                     <button type="button" class="btn btn-signup-1" onclick="toggleForm()">Belum punya akun? Sign up!</button>
+                 </form>
+             </div>
 
-            <div class="form-wrapper hidden" id="registerWrapper">
-                <h2>Daftar</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="registerName">Nama Lengkap</label>
-                        <input type="text" id="registerName" placeholder="Nama Anda" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" placeholder="name@mail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" placeholder="••••••••••••••••" required>
-                    </div>
-                    <button type="submit" class="btn btn-signup-2">Sign up</button>
-                    <button type="button" class="btn btn-login-2" onclick="toggleForm()">Sudah punya akun? Login!</button>
-                </form>
-            </div>
-        </div>
-    </div>
+             <div class="form-wrapper hidden" id="registerWrapper">
+                 <h2>Daftar</h2>
+                 <form onsubmit="handleRegister(event)">
+                     <div class="form-group">
+                         <label for="registerName">Nama Lengkap</label>
+                         <input type="text" id="registerName" placeholder="Nama Anda" required>
+                     </div>
+                     <div class="form-group">
+                         <label for="registerEmail">Email</label>
+                         <input type="email" id="registerEmail" placeholder="name@mail.com" required>
+                     </div>
+                     <div class="form-group">
+                         <label for="registerPassword">Password</label>
+                         <input type="password" id="registerPassword" placeholder="••••••••••••••••" required>
+                     </div>
+                     <button type="submit" class="btn btn-signup-2">Sign up</button>
+                     <button type="button" class="btn btn-login-2" onclick="toggleForm()">Sudah punya akun? Login!</button>
+                 </form>
+             </div>
+         </div>
+     </div>
 
-    <script src="script/dashboard.js"></script>
-    <script>
-        function toggleForm() {
-            const loginWrapper = document.getElementById('loginWrapper');
-            const registerWrapper = document.getElementById('registerWrapper');
-            loginWrapper.classList.toggle('hidden');
-            registerWrapper.classList.toggle('hidden');
-        }
-    </script>
-</body>
-</html>
+     <script src="script/dashboard.js"></script>
+     <script>
+         function toggleForm() {
+             const loginWrapper = document.getElementById('loginWrapper');
+             const registerWrapper = document.getElementById('registerWrapper');
+             loginWrapper.classList.toggle('hidden');
+             registerWrapper.classList.toggle('hidden');
+         }
+     </script>
+ </body>
+ </html>

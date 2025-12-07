@@ -105,9 +105,8 @@ let currentUser = null;
             try {
                 const logos = document.querySelectorAll('.logo-img');
                 logos.forEach(img => {
-                    const desired = 'images/DIGICLINIC.png';
+                    const desired = '../images/DIGICLINIC.png';
                     if (img.getAttribute('src') !== desired) {
-                        // jangan override jika already data URL fallback set earlier
                         img.setAttribute('src', desired);
                     }
                 });
