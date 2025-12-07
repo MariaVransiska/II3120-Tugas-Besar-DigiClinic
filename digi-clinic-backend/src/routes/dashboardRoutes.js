@@ -9,5 +9,6 @@ router.put('/medicine/:id', dashboardController.updateMedicine); // edit obat
 router.delete('/medicine/:id', dashboardController.deleteMedicine); // hapus obat
 router.get('/medicine/:id', dashboardController.getMedicineById); // detail obat
 router.post('/take-medicine', dashboardController.takeMedicine); // ambil obat (kurangi stok)
+router.get('/low-stock', dashboardController.getLowStockMedicines); // daftar obat stok rendah
 
 module.exports = router;

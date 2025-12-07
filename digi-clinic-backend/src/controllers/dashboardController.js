@@ -1,3 +1,4 @@
+// Dummy data untuk apoteker (user)
 const users = [
     { id: 1, name: 'Apoteker', email: 'apoteker@digiclinic.com', role: 'admin' }
 ];
@@ -141,7 +142,7 @@ exports.getMedicineById = (req, res) => {
     res.status(200).json(medicine);
 };
 
-// Ambil/kurangi stok obat (fitur pengambilan obat oleh pasien)
+// Ambil/kurangi stok obat 
 exports.takeMedicine = (req, res) => {
     const { id, qty } = req.body;
     const medicine = medicines.find(m => m.id === id || m.id === parseInt(id));
