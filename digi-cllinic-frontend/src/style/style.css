@@ -31,14 +31,14 @@
         }
 
         .logo-img {
-            max-height: 56px; /* tinggi navbar-friendly */
+            max-height: 56px; 
             width: auto;
             height: auto;
             border-radius: 6px;
             object-fit: contain;
             transition: transform 0.2s ease;
             display: inline-block;
-            background: transparent;
+            background: #FEF1E6;
         }
 
         /* sembunyikan teks brand saat logo berhasil dimuat; tampilkan hanya jika logo gagal */
@@ -373,4 +373,339 @@
         .hero .cta:hover {
             background: #FFB085;
             color: #fff;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background-color: #FEF1E6;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: #90AACB;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #FFB085;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            color: #90AACB;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #90AACB;
+            color: #FEF1E6;
+            padding: 3rem 2rem 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-section h4 {
+            color: #FEF1E6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            color: #FEF1E6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #FEF1E6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #FFB085;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(254, 241, 230, 0.3);
+            color: #FEF1E6;
+        }
+
+        /* Login Page (Split Screen) */
+        .login-page {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .login-hero {
+            flex: 1;
+            background: linear-gradient(-45deg, #90AACB, #205599,#2574db, #b9cfeb, #5594e6);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 5rem 3rem;
+            color: #FEF1E6;
+            border-radius: 30px 30px 30px 30px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 100% 80%;
+            }
+            75% {
+                background-position: 0% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-content {
+            text-align: left;
+            max-width: 500px
+        }
+
+        .hero-logo {
+            max-width: 300px;
+            height: auto;
+            padding: 5px;
+            margin-bottom: 5rem;
+            background-color: #FEF1E6;
+            border-radius: 10px;
+            transition: transform 0.2s ease-out;
+        }
+        
+        .hero-logo:hover {
+            transform: translateY(-5px);
+            
+        }
+
+        .login-hero h1 {
+            font-size: 5rem;
+            margin-bottom: 3rem;
+            color: #FEF1E6;
+            font-weight: 700;
+            line-height: 1.2
+        }
+
+        .login-hero p {
+            font-size: 2rem;
+            color: #FFB085;
+            margin-bottom: 1rem;
+            font-family: Verdana;
+        }
+
+        .login-form-section {
+            flex: 1;
+            background-color: #FEF1E6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .form-wrapper h2 {
+            color: #90AACB;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.6rem;
+        }
+
+        .form-wrapper .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-wrapper .form-group label {
+            display: block;
+            color: #90AACB;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-wrapper .form-group input,
+        .form-wrapper .form-group select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 2px solid #90AACB;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-wrapper .form-group input:focus,
+        .form-wrapper .form-group select:focus {
+            outline: none;
+            border-color: #FFB085;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .form-options label {
+            color: #90AACB;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .form-options a {
+            color: #FFB085;
+            text-decoration: none;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .form-wrapper .btn {
+            width: 100%;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-login-1 {
+            background-color: #90AACB;
+            color: #FEF1E6;
+        }
+
+        .btn-login-1:hover {
+            background-color: #7A92B4;
+        }
+
+        .btn-signup-1 {
+            background-color: #FEF1E6;
+            color: #90AACB;
+            border: 2px solid #90AACB;
+        }
+
+        .btn-signup-1:hover {
+            background-color: #FFB085;
+            color: #FEF1E6;
+            border-color: #FFB085;
+        }
+
+        .btn-login-2 {
+            background-color: #FEF1E6;
+            color: #90AACB;
+            border: 2px solid #90AACB;
+        }
+
+        .btn-login-2:hover {
+            background-color: #FFB085;
+            color: #FEF1E6;
+            border-color: #FFB085;
+        }
+
+        .btn-signup-2 {
+            background-color: #90AACB;
+            color: #FEF1E6;
+        }
+
+        .btn-signup-2:hover {
+            background-color: #7A92B4;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .login-hero {
+                min-height: 250px;
+            }
+
+            .login-form-section {
+                flex: 1;
+            }
+
+            .login-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-wrapper {
+                max-width: 100%;
+            }
         }
