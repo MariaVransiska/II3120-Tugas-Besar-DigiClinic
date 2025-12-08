@@ -129,7 +129,7 @@ function saveChanges() {
     const form = document.getElementById('editObatForm');
     const id = form.dataset.id;
     if (form.checkValidity()) {
-        fetch(`http://localhost:3000/api/dashboard/medicine/${id}`, {
+        fetch(`https://ii3120-tugas-besar-digiclinic.onrender.com/api/dashboard/medicine/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -186,7 +186,7 @@ function saveNewObat() {
     const dosis = document.getElementById('addDosis').value.trim();
     const keterangan = document.getElementById('addKeterangan').value.trim();
 
-    fetch('http://localhost:3000/api/dashboard/medicine', {
+    fetch('https://ii3120-tugas-besar-digiclinic.onrender.com/api/dashboard/medicine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -215,7 +215,7 @@ function saveNewObat() {
 
 function deleteMedicine(id) {
     if (!confirm('Hapus obat ini?')) return;
-    fetch(`http://localhost:3000/api/dashboard/medicine/${id}`, {
+    fetch(`https://ii3120-tugas-besar-digiclinic.onrender.com/api/dashboard/medicine/${id}`, {
         method: 'DELETE'
     })
     .then(res => res.json())
@@ -230,7 +230,7 @@ function escapeQuotes(str) {
 }
 
 function fetchObatTable() {
-    fetch('http://localhost:3000/api/dashboard/dashboard')
+    fetch('https://ii3120-tugas-besar-digiclinic.onrender.com/api/dashboard/dashboard')
         .then(res => res.json())
         .then(data => {
             const tbody = document.getElementById('obatTableBody');
@@ -277,7 +277,7 @@ function showLowStockNotification(list) {
 }
 
 function showEditForm(id) {
-    fetch('http://localhost:3000/api/dashboard/medicine/' + id)
+    fetch('https://ii3120-tugas-besar-digiclinic.onrender.com/api/dashboard/medicine/' + id)
         .then(res => res.json())
         .then(med => {
             document.getElementById('namaObat').value = med.name;
